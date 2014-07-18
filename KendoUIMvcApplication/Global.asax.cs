@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Kendo.Mvc.UI;
 using SPA;
+using Newtonsoft.Json;
 
 namespace KendoUIMvcApplication
 {
@@ -25,6 +26,8 @@ namespace KendoUIMvcApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
     }
 }

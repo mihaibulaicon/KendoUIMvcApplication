@@ -16,6 +16,10 @@ namespace Northwind.Controllers
         {
             return Get(new ProductQuery { Discontinued = false }).Data;
         }
+        public IQueryable<Product> Get()
+        {
+            return Get(new ProductQuery { Discontinued = false }).Data;
+        }
 
         protected override void Modify(Product entity)
         {

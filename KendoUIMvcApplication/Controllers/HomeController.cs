@@ -19,5 +19,9 @@ namespace KendoUIMvcApplication.Controllers
         {
             return View();
         }
+        public ActionResult AngularGrid()
+        {
+            return View();
+        }
     }
 }

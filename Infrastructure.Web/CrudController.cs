@@ -39,6 +39,7 @@ namespace Infrastructure.Web
             return entities;
         }
 
+        [NonAction]
         public DataSourceResult GetAll([ModelBinder] DataSourceRequest request)
         {
             return GetAll().ToDataSourceResult(request);

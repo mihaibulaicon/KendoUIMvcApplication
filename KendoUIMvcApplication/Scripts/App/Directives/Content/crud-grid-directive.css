@@ -1,0 +1,7 @@
+﻿table.crud-grid th:hover:not(:first-child) {
+    cursor: pointer;
+}
+
+.filter {
+    padding-bottom: 10px;
+}
