@@ -1,0 +1,4 @@
+﻿<#@ assembly name="$(TargetDir)Northwind.dll" #>
+<#
+	_store = TestContextFactory<Northwind.ProductServiceContext>.GetSchema();
+#>

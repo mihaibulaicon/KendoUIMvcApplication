@@ -1,0 +1,38 @@
+﻿@using System.Web.Optimization
+@{
+    Layout = null;
+}
+<!doctype html>
+<html ng-app="app">
+<head>
+    <title>AngularJS CRUD Grid - by Jon Gallant (@@jongallant)</title>
+    @Styles.Render("~/content/bootstrap/base")
+    @Styles.Render("~/content/bootstrap/base")
+    @Styles.Render("~/content/toastr")
+    @Styles.Render("~/content/css")
+    @Styles.Render("~/content/angular")
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Products</h1>
+            <div crud-grid table='product' columns='
+                 [{"name":"Id","class":"col-md-1","autoincrement": "true"},
+                 {"name":"ProductName", "class": "col-md-2"},
+                 {"name":"UnitPrice", "class": "col-md-2"},
+                 {"name":"UnitsInStock", "class": "col-md-2"}
+                 ]' class="col-md-8"></div>
+
+        </div>
+      
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/toastr")
+    @Scripts.Render("~/bundles/bootstrap")
+
+</body>
+</html>
+
+
+
