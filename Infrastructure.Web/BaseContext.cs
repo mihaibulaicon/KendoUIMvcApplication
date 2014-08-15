@@ -10,7 +10,7 @@ namespace Infrastructure.Web
         public DbModelBuilder ModelBuilder { get; set; }
     }
 
-    public class SaveChangesEventArgs
+    public class SaveChangesEventArgs : EventArgs
     {
         public object State { get; set; }
         public BaseContext Context { get; set; }
@@ -60,31 +60,32 @@ namespace Infrastructure.Web
 
         public override int SaveChanges()
         {
-            int result;
-            var savingHandler = SavingChanges;
             SaveChangesEventArgs args = null;
+
+            ExecuteHandler(SavingChanges, ref args);
+
+            var result = base.SaveChanges();
+
+            ExecuteHandler(SavedChanges, ref args);
+
+            return result;
+        }
+
+        private void ExecuteHandler(EventHandler<SaveChangesEventArgs> handler, ref SaveChangesEventArgs args)
+        {
+            if(handler == null || executingEvent)
+            {
+                return;
+            }
             try
             {
-                if(!executingEvent && savingHandler != null)
-                {
-                    executingEvent = true;
-                    savingHandler(this, args = new SaveChangesEventArgs { Context = this });
-                }
-
-                result = base.SaveChanges();
-
-                var savedHandler = SavedChanges;
-                if(!executingEvent && savedHandler != null)
-                {
-                    executingEvent = true;
-                    savedHandler(this, args ?? new SaveChangesEventArgs { Context = this });
-                }
+                executingEvent = true;
+                handler(this, args ?? (args = new SaveChangesEventArgs { Context = this }));
             }
             finally
             {
                 executingEvent = false;
             }
-            return result;
         }
     }
 }
